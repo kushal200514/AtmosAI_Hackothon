@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --color-brand-primary: #64BC45;
+  --color-brand-light: #7FC441;
+  --color-brand-accent: #4AB746;
+  --color-brand-dark: #469A36;
+  --color-brand-soft: #C2EBBA;
+  --color-brand-very-light: #F1F8ED;
+  --color-brand-bg: #F5F7F4;
+  --color-brand-card: #FFFFFF;
+  --color-brand-border: #E8ECE7;
+  --color-brand-text-primary: #263329;
+  --color-brand-text-secondary: #788278;
+}
+
+:root {
+  --primary-green: #64BC45;
+  --light-green: #7FC441;
+  --accent-green: #4AB746;
+  --dark-green: #469A36;
+  --soft-green: #C2EBBA;
+  --very-light-green: #F1F8ED;
+  --main-bg: #F5F7F4;
+  --card-bg: #FFFFFF;
+  --border-color: #E8ECE7;
+  --text-primary: #263329;
+  --text-secondary: #788278;
+}
+
+body {
+  margin: 0;
+  background-color: #F5F7F4;
+  color: #263329;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Green and White clean card styles */
+.atmos-card {
+  background: #FFFFFF;
+  border: 1px solid #E8ECE7;
+  box-shadow: 0 2px 12px 0 rgba(38, 51, 41, 0.04);
+  border-radius: 1.25rem;
+}
+
+.atmos-card-interactive {
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.atmos-card-interactive:active {
+  transform: scale(0.98);
+}
+.atmos-card-interactive:hover {
+  border-color: #C2EBBA;
+  box-shadow: 0 4px 18px 0 rgba(100, 188, 69, 0.12);
+}
+
+/* Bottom Nav bar */
+.mobile-bottom-nav {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid #E8ECE7;
+  padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+  box-shadow: 0 -4px 16px 0 rgba(38, 51, 41, 0.04);
+}
+
+/* Primary Green Button */
+.btn-primary {
+  background-color: #64BC45;
+  color: #FFFFFF;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+.btn-primary:hover {
+  background-color: #469A36;
+}
+
+/* Secondary Pale Green Button */
+.btn-secondary {
+  background-color: #F1F8ED;
+  color: #469A36;
+  border: 1px solid #C2EBBA;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.btn-secondary:hover {
+  background-color: #C2EBBA;
+  color: #263329;
+}
+
+/* Smooth modal bottom-sheet animation */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-sheet-up {
+  animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Leaflet clean light theme tweaks */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.25rem;
+  background-color: #F1F8ED !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #FFFFFF !important;
+  color: #263329 !important;
+  border: 1px solid #E8ECE7 !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 8px 24px rgba(38, 51, 41, 0.08) !important;
+}
+
+.leaflet-popup-tip {
+  background: #FFFFFF !important;
+}

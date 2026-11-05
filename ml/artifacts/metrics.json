@@ -1,0 +1,114 @@
+{
+  "model_family": "LightGBM Regression",
+  "model_version": "1.0.0",
+  "dataset_info": {
+    "location": "Bengaluru, India (12.9716, 77.5946)",
+    "total_samples": 1362,
+    "train_samples": 953,
+    "val_samples": 204,
+    "test_samples": 205,
+    "features_count": 23
+  },
+  "feature_columns": [
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "wind_direction",
+    "surface_pressure",
+    "hour",
+    "dayofweek",
+    "is_weekend",
+    "is_rush_hour",
+    "sin_hour",
+    "cos_hour",
+    "pm25_lag_1",
+    "pm25_lag_2",
+    "pm25_lag_3",
+    "pm25_lag_6",
+    "pm25_lag_12",
+    "pm25_lag_24",
+    "pm25_roll_mean_3h",
+    "pm25_roll_std_3h",
+    "pm25_roll_mean_6h",
+    "pm25_roll_mean_24h",
+    "wind_roll_mean_3h",
+    "temp_roll_mean_3h"
+  ],
+  "horizons": {
+    "1h": {
+      "horizon_hours": 1,
+      "lgbm": {
+        "mae": 5.01,
+        "rmse": 6.8,
+        "r2": 0.606,
+        "residual_std": 6.78
+      },
+      "persistence_baseline": {
+        "mae": 3.07,
+        "rmse": 4.89,
+        "r2": 0.797
+      },
+      "mae_improvement_pct": -63.2
+    },
+    "3h": {
+      "horizon_hours": 3,
+      "lgbm": {
+        "mae": 7.38,
+        "rmse": 9.77,
+        "r2": 0.196,
+        "residual_std": 9.69
+      },
+      "persistence_baseline": {
+        "mae": 6.96,
+        "rmse": 9.6,
+        "r2": 0.224
+      },
+      "mae_improvement_pct": -6.1
+    },
+    "4h": {
+      "horizon_hours": 4,
+      "lgbm": {
+        "mae": 8.02,
+        "rmse": 10.89,
+        "r2": 0.012,
+        "residual_std": 10.64
+      },
+      "persistence_baseline": {
+        "mae": 8.47,
+        "rmse": 11.2,
+        "r2": -0.044
+      },
+      "mae_improvement_pct": 5.3
+    },
+    "5h": {
+      "horizon_hours": 5,
+      "lgbm": {
+        "mae": 8.86,
+        "rmse": 11.73,
+        "r2": -0.131,
+        "residual_std": 11.49
+      },
+      "persistence_baseline": {
+        "mae": 9.61,
+        "rmse": 12.39,
+        "r2": -0.261
+      },
+      "mae_improvement_pct": 7.7
+    },
+    "6h": {
+      "horizon_hours": 6,
+      "lgbm": {
+        "mae": 9.33,
+        "rmse": 12.11,
+        "r2": -0.19,
+        "residual_std": 11.73
+      },
+      "persistence_baseline": {
+        "mae": 10.27,
+        "rmse": 13.16,
+        "r2": -0.405
+      },
+      "mae_improvement_pct": 9.2
+    }
+  }
+}

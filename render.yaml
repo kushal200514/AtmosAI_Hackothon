@@ -1,0 +1,64 @@
+# ========================================================
+# AtmosAI Render Deployment Blueprint
+# Web Service (FastAPI Backend) + Static Site (Vite React Frontend)
+# ========================================================
+
+services:
+  # 1. FastAPI Backend Web Service
+  - type: web
+    name: atmosai-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: "python -m pip install --upgrade pip && pip install -r backend/requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: ENVIRONMENT
+        value: production
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: OPENAQ_BASE_URL
+        value: https://api.openaq.org/v3
+      - key: OPEN_METEO_AIR_QUALITY_URL
+        value: https://air-quality-api.open-meteo.com/v1/air-quality
+      - key: OPEN_METEO_WEATHER_URL
+        value: https://api.open-meteo.com/v1/forecast
+
+  # 2. Vite React Frontend Static Site
+  - type: web
+    name: atmosai-frontend
+    env: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: ./dist
+    autoDeploy: true
+    routes:
+      # Proxy API and health requests to backend
+      - type: rewrite
+        source: /api/*
+        destination: https://atmosai-backend.onrender.com/api/*
+      - type: rewrite
+        source: /health
+        destination: https://atmosai-backend.onrender.com/health
+      # Single Page Application (SPA) fallback
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
