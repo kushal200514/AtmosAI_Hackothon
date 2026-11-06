@@ -48,8 +48,28 @@ export default function ForecastAccuracyDashboard({ selectedLocation = 'bengalur
   }, [selectedLocation, horizon, dateRange, dataMode]);
 
   useEffect(() => {
-    loadAccuracyMetrics();
-  }, [loadAccuracyMetrics]);
+    let isMounted = true;
+    setLoading(true);
+    setError(null);
+
+    fetchForecastAccuracy(selectedLocation, horizon, dateRange, dataMode)
+      .then(data => {
+        if (isMounted) setAccuracyData(data);
+      })
+      .catch(err => {
+        if (isMounted) {
+          console.error('Failed to load forecast accuracy data:', err);
+          setError('Unable to load forecast accuracy metrics. Please check network connection.');
+        }
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedLocation, horizon, dateRange, dataMode]);
 
   const horizons = [
     { value: 1, label: '+1 Hour Ahead', short: '1h' },
